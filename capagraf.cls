@@ -164,4 +164,15 @@
   \end{minipage}%
 }{}
 
+% ════════════════════════════════════════════════════════════
+%  TABELA DE ESPESSURA
+% ════════════════════════════════════════════════════════════
+\newcommand{\cg@calcEspessura}{%
+  \ifthenelse{\equal{\cg@gramatura}{56}}{\renewcommand{\cg@espessuraPorFolha}{0.07}}{}%
+  \ifthenelse{\equal{\cg@gramatura}{60}}{\renewcommand{\cg@espessuraPorFolha}{0.08}}{}%
+  \ifthenelse{\equal{\cg@gramatura}{75}}{\renewcommand{\cg@espessuraPorFolha}{0.10}}{}%
+  \ifthenelse{\equal{\cg@gramatura}{90}}{\renewcommand{\cg@espessuraPorFolha}{0.12}}{}%
+  \ifthenelse{\equal{\cg@gramatura}{115}}{\renewcommand{\cg@espessuraPorFolha}{0.15}}{}%
+}
+
 \endinput
