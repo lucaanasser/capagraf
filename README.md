@@ -60,4 +60,4 @@ Os ambientes são declarados **antes** do `\begin{document}`. O comando `\gerarC
 
 ---
 
-Para documentação completa consulte o **manual**.
+Para documentação completa consulte o **manual.pdf** encontrado na mesma pasta.

@@ -12,6 +12,13 @@
 %    sangria=5     sulco=5
 %
 %  COMANDO FINAL:  \gerarCapa
+%
+%  UTILITÁRIOS disponíveis dentro dos ambientes:
+%    \cgFundo{HEXCOR}             fundo colorido
+%    \cgImagemFundo{arquivo}      imagem de fundo
+%    \cgSeparador[HEXCOR]{esp}{vspace}  linha horizontal
+%    \cgVfill                     espaço elástico vertical
+%    \cgVspace{fração}            ex: \cgVspace{0.05} = 5% da altura
 % ============================================================
 
 \NeedsTeXFormat{LaTeX2e}
@@ -331,11 +338,23 @@
     \fill[cgSulcoCor] (cgHL_BL) rectangle (cgHL_TR);
     \fill[cgSulcoCor] (cgHR_BL) rectangle (cgHR_TR);
 
-    % ════════════════════════════════════════════════════════
-    %  ANOTAÇÕES DOS SULCOS
-    % ════════════════════════════════════════════════════════
 
-    % SULCO HL — ACIMA
+    % Anotações dos sulcos: ACIMA e ABAIXO, fora das zonas de conteúdo.
+    % As marcas vermelhas verticais existem nos 4 cantos das lombadas:
+    %   - cgHL_BL (inferior esquerdo HL): marca desce  de -cgCMO a -(cgCMO+cgCML)
+    %   - cgHL_TR (superior direito HL):  marca sobe   de +cgCMO a +(cgCMO+cgCML)
+    %   - cgHR_BL (inferior esquerdo HR): marca desce
+    %   - cgHR_TR (superior direito HR):  marca sobe
+    % As linhas-guia e setas ficam apenas nas bordas externas de cada sulco,
+    % nunca entrando nas zonas de lombada, capa ou contracapa.
+    %
+    % Convenção de x para cada sulco:
+    %   HL: x_esq = cgHL_BL.x   x_dir = cgHL_TR.x  (= cgHL_BL.x + cgHG)
+    %   HR: x_esq = cgHR_BL.x   x_dir = cgHR_TR.x  (= cgHR_BL.x + cgHG)
+    %
+    % SULCO HL — ACIMA (y ref = cgHL_TR.y = cgBackTL.y)
+    %   x_esq (cgHL_BL.x): SEM marca vermelha acima → linha parte do topo
+    %   x_dir (cgHL_TR.x): COM marca vermelha acima → linha parte após 12mm
     \draw[cgGrid, line width=0.3pt, dashed]
       ($(cgHL_BL)+(0,\cgCH)$) -- ($(cgHL_BL)+(0,\cgCH+22mm)$);
     \draw[cgGrid, line width=0.3pt, dashed]
@@ -345,7 +364,9 @@
     \node[font=\tiny,text=cgGrid,anchor=south]
       at ($(cgHL_BL)+(0.5\cgHG,\cgCH+22mm)$){\cg@sulco mm sulco};
 
-    % SULCO HL — ABAIXO
+    % SULCO HL — ABAIXO (y ref = cgHL_BL.y = cgBackBL.y)
+    %   x_esq (cgHL_BL.x): COM marca vermelha abaixo → linha parte após -12mm
+    %   x_dir (cgHL_TR.x): SEM marca vermelha abaixo → linha parte do fundo
     \draw[cgGrid, line width=0.3pt, dashed]
       ($(cgHL_BL)+(0,-12mm)$) -- ($(cgHL_BL)+(0,-22mm)$);
     \draw[cgGrid, line width=0.3pt, dashed]
@@ -356,6 +377,8 @@
       at ($(cgHL_BL)+(0.5\cgHG,-22mm)$){\cg@sulco mm sulco};
 
     % SULCO HR — ACIMA
+    %   x_esq (cgHR_BL.x): COM marca vermelha acima → linha parte após 12mm
+    %   x_dir (cgHR_TR.x): SEM marca vermelha acima → linha parte do topo
     \draw[cgGrid, line width=0.3pt, dashed]
       ($(cgHR_BL)+(0,\cgCH+12mm)$) -- ($(cgHR_BL)+(0,\cgCH+22mm)$);
     \draw[cgGrid, line width=0.3pt, dashed]
@@ -366,6 +389,8 @@
       at ($(cgHR_BL)+(0.5\cgHG,\cgCH+22mm)$){\cg@sulco mm sulco};
 
     % SULCO HR — ABAIXO
+    %   x_esq (cgHR_BL.x): SEM marca vermelha abaixo → linha parte do fundo
+    %   x_dir (cgHR_TR.x): COM marca vermelha abaixo → linha parte após -12mm
     \draw[cgGrid, line width=0.3pt, dashed]
       ($(cgHR_BL)+(0,0)$) -- ($(cgHR_BL)+(0,-22mm)$);
     \draw[cgGrid, line width=0.3pt, dashed]
