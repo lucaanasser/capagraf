@@ -111,4 +111,57 @@
   \global\let\cg@conteudoLombada\BODY
 }{}
 
+% ════════════════════════════════════════════════════════════
+%  UTILITÁRIOS PARA USO DENTRO DOS AMBIENTES
+% ════════════════════════════════════════════════════════════
+
+% \cgFundo{HEXCOR}
+\newcommand{\cgFundo}[1]{%
+  \definecolor{cg@@fundo}{HTML}{#1}%
+  \tcbset{colback=cg@@fundo}%
+  \ignorespaces
+}
+
+% \cgImagemFundo{arquivo}
+\newcommand{\cgImagemFundo}[1]{%
+  \tcbset{
+    enhanced,
+    underlay={\node[inner sep=0, anchor=south west] at (interior.south west)
+      {\includegraphics[width=\tcbtextwidth, height=\tcbtextheight,
+       keepaspectratio=false]{#1}};},
+  }%
+  \ignorespaces
+}
+
+% \cgSeparador[HEXCOR]{espessura}{vspace}
+\newcommand{\cgSeparador}[3][FFFFFF]{%
+  \par\vspace{#3}%
+  {\color[HTML]{#1}\rule{\linewidth}{#2}}%
+  \par\vspace{#3}%
+}
+
+% \cgVspace{fração} — fração da altura da capa
+\newcommand{\cgVspace}[1]{\vspace{#1\cgCH}}
+
+% \cgVfill — espaço elástico
+\newcommand{\cgVfill}{\vfill}
+
+% \begin{cgMargens}{top mm}{right mm}{bottom mm}{left mm}
+\NewEnviron{cgMargens}[4]{%
+  \vspace*{#1mm}%
+  \noindent\hspace*{#4mm}%
+  \begin{minipage}[t]{\dimexpr\linewidth-#2mm-#4mm\relax}%
+    \BODY
+  \end{minipage}%
+  \vspace*{#3mm}%
+}{}
+
+% \begin{cgMargensLombada}{top mm}{bottom mm}
+\NewEnviron{cgMargensLombada}[2]{%
+  \noindent\hspace*{#2mm}%
+  \begin{minipage}[c]{\dimexpr\linewidth-#1mm-#2mm\relax}%
+    \BODY
+  \end{minipage}%
+}{}
+
 \endinput
