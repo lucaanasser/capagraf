@@ -68,4 +68,47 @@
 }
 \ProcessPgfPackageOptions{/capagraf}
 
+% ════════════════════════════════════════════════════════════
+%  COMPRIMENTOS GLOBAIS (definidos em \gerarCapa)
+% ════════════════════════════════════════════════════════════
+\newlength{\cgCW}    % largura da capa
+\newlength{\cgCH}    % altura da capa
+\newlength{\cgSP}    % lombada
+\newlength{\cgBL}    % sangria
+\newlength{\cgHG}    % sulco
+\newlength{\cgTW}    % largura total
+\newlength{\cgTH}    % altura total
+\newlength{\cgCML}
+\newlength{\cgCMO}
+
+% ════════════════════════════════════════════════════════════
+%  ARMAZENAMENTO DOS AMBIENTES
+% ════════════════════════════════════════════════════════════
+\newcommand{\cg@conteudoCapa}{}
+\newcommand{\cg@conteudoContracapa}{}
+\newcommand{\cg@conteudoLombada}{}
+
+\newif\ifcg@temCapa       \cg@temCapafalse
+\newif\ifcg@temContracapa \cg@temContracapafalse
+\newif\ifcg@temLombada    \cg@temLombadafalse
+
+% ════════════════════════════════════════════════════════════
+%  AMBIENTES PÚBLICOS
+% ════════════════════════════════════════════════════════════
+
+\NewEnviron{capa}{%
+  \global\cg@temCapatrue
+  \global\let\cg@conteudoCapa\BODY
+}{}
+
+\NewEnviron{contracapa}{%
+  \global\cg@temContracapatrue
+  \global\let\cg@conteudoContracapa\BODY
+}{}
+
+\NewEnviron{lombada}{%
+  \global\cg@temLombadatrue
+  \global\let\cg@conteudoLombada\BODY
+}{}
+
 \endinput
