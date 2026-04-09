@@ -1,0 +1,308 @@
+% ============================================================
+%  capa-exemplo.tex  —  arquivo de exemplo comentado
+%  Demonstra todas as opções da classe capagraf.
+%  Compile com LuaLaTeX no Overleaf.
+% ============================================================
+
+% ── OPÇÕES DO DOCUMENTCLASS ─────────────────────────────────
+% largura/altura : dimensões do livro em mm
+% paginas        : total de páginas (determina espessura da lombada)
+% gramatura      : g/m² do papel (56, 60, 75, 90 ou 115)
+% sangria        : área extra além do corte, em mm (tipicamente 3–5)
+% sulco          : largura do sulco de dobra, em mm (tipicamente 3–5)
+% corSulco       : cor do sulco em hex sem # (padrão: 666666)
+\documentclass[
+  largura   = 148,
+  altura    = 210,
+  sangria   = 5,
+  sulco     = 5,
+  paginas   = 600,
+  gramatura = 75,
+  corSulco  = 666666
+]{capagraf}
+
+\usepackage{setspace}   % controle de espaçamento entre linhas (\setstretch)
+\usepackage{ragged2e}   % justificação avançada (\justifying, \Centering)
+
+
+% ════════════════════════════════════════════════════════════
+%  CAPA  —  conteúdo da frente do livro
+%  Área viva: largura × altura (sem sangria/sulco)
+%  Padding já aplicado pela classe: top/bottom=sangria, left=sulco, right=sangria
+% ════════════════════════════════════════════════════════════
+\begin{capa}
+
+  % \cgFundo{HEX} preenche o fundo com cor sólida (inclusive a sangria).
+  % Deve ser o PRIMEIRO comando dentro do ambiente.
+  \cgFundo{1B6B7B}
+
+  % \begin{cgMargens}{top}{right}{bottom}{left}
+  % Adiciona margens internas em mm ALÉM do padding já existente.
+  % Use 0 em qualquer lado para manter apenas o padding da classe.
+  \begin{cgMargens}{8}{10}{8}{10}
+
+    % Define a cor do texto para todo o bloco
+    \color[HTML]{D4A96A}
+
+    % Espaçamento entre linhas (1.0 = simples, 1.5 = um e meio)
+    \setstretch{1.1}
+    \setlength{\parskip}{0pt}
+
+    % Espaço vertical em mm — use para empurrar o conteúdo para baixo
+    \vspace{8mm}
+
+    % Título principal — \Centering centraliza, \MakeUppercase coloca em maiúsculas
+    {\Centering
+      {\fontsize{38}{40}\selectfont\bfseries   % fontsize{tamanho}{entrelinha}
+        \MakeUppercase{Título do Livro}\par}
+    }
+
+    \vspace{5mm}
+
+    % \cgSeparador[HEX]{espessura}{vspace}
+    % Linha horizontal decorativa. vspace é aplicado acima e abaixo.
+    \cgSeparador[D4A96A]{1.2pt}{0pt}
+
+    \vspace{5mm}
+
+    % Subtítulo
+    {\Centering
+      {\fontsize{15}{18}\selectfont\bfseries
+        \MakeUppercase{Subtítulo do Livro}\par}
+    }
+
+    \vspace{8mm}
+
+    % Informações de edição/volume
+    {\Centering
+      {\fontsize{13}{16}\selectfont\itshape Volume 1\par}
+      \vspace{1mm}
+      {\fontsize{12}{14}\selectfont\itshape
+        6\textsuperscript{a} ed.\par}
+    }
+
+    % \cgVfill empurra tudo abaixo dele para o rodapé da zona
+    \cgVfill
+
+    % Autores no rodapé
+    {\Centering
+      {\fontsize{13}{15}\selectfont\bfseries
+        \MakeUppercase{Nome do Autor 1} \textbullet{}
+        \MakeUppercase{Nome do Autor 2}\par}
+    }
+
+    \vspace{8mm}
+
+  \end{cgMargens}
+\end{capa}
+
+
+% ════════════════════════════════════════════════════════════
+%  CONTRACAPA  —  verso da capa
+%  Padding padrão: top/bottom=sangria, left=sangria, right=sulco
+% ════════════════════════════════════════════════════════════
+\begin{contracapa}
+
+  \cgFundo{1B6B7B}
+
+  % Note que left e right são trocados em relação à capa,
+  % pois a contracapa espelha o lado do sulco.
+  \begin{cgMargens}{10}{8}{8}{10}
+
+    \color[HTML]{FFFFFF}
+    \setstretch{1.35}
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{7pt}
+
+    % Sinopse — \justifying alinha o texto nas duas margens
+    {\fontsize{8.5}{12.5}\selectfont\justifying
+
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Cras convallis, dui ac pretium mattis, mauris massa accumsan
+      quam, quis scelerisque risus odio facilisis quam. Nullam
+      dictum quam quis justo dapibus, et fringilla metus venenatis.
+      Maecenas volutpat tincidunt imperdiet.
+
+      Nulla ac ex varius, finibus mauris luctus, elementum arcu.
+      Etiam feugiat enim enim, in congue velit cursus congue. Donec
+      elit enim, eleifend eget commodo et, congue a metus. Etiam
+      tristique metus nulla, sit amet mollis neque mollis vitae.
+
+      Duis imperdiet dictum tortor, vel ullamcorper orci vehicula
+      quis. Donec venenatis tempus tempus. Pellentesque habitant
+      morbi tristique senectus et netus et malesuada fames ac turpis
+      egestas. Sed sed eros eu massa scelerisque pulvinar.
+
+    }
+
+    % \cgVfill empurra o bloco seguinte para o rodapé
+    \cgVfill
+
+    % Coleção/série
+    {\fontsize{8}{10}\selectfont\color[HTML]{D4A96A}\bfseries
+      NOME DA COLEÇÃO\par}
+
+    \vspace{5mm}
+
+    % ISBN
+    {\fontsize{8}{10}\selectfont\color[HTML]{AAAAAA}
+      ISBN 978-00-000-00000-0\par}
+
+  \end{cgMargens}
+\end{contracapa}
+
+
+% ════════════════════════════════════════════════════════════
+%  LOMBADA  —  a espinha do livro
+%  O conteúdo é rotacionado 90° automaticamente pela classe.
+%  Escreva da esquerda para a direita: aparecerá de baixo para
+%  cima na lombada (padrão brasileiro).
+%  Padding padrão: left=sangria, right=sangria (nas extremidades)
+% ════════════════════════════════════════════════════════════
+\begin{lombada}
+
+  \cgFundo{D4A96A}
+
+  % \begin{cgMargensLombada}{top}{bottom}
+  % Margens nas extremidades da lombada (topo e base do livro).
+  % Atenção: aqui "top" é o topo do livro e "bottom" é a base —
+  % os eixos estão rotacionados em relação à capa/contracapa.
+  \begin{cgMargensLombada}{8}{8}
+
+    \color[HTML]{1B6B7B}
+    \setstretch{1.0}
+
+    % \hfill separa título (esquerda) do volume (direita) ao longo da lombada
+    {\fontsize{12}{14}\selectfont\bfseries
+      \MakeUppercase{Título do Livro}%
+      \hfill
+      {\fontsize{9}{11}\selectfont VOL~1}%
+    }
+
+  \end{cgMargensLombada}
+\end{lombada}
+
+
+% ════════════════════════════════════════════════════════════
+%  EXEMPLO COM IMAGENS JPG
+%  ──────────────────────────────────────────────────────────
+%  Para usar imagens de fundo, siga o padrão:
+%    1. \cgFundo{HEX}        — define a cor da sangria
+%    2. \cgImagemFundo{arq}  — preenche a área viva com a imagem
+%    3. \begin{cgMargens}    — sobrepõe texto à imagem
+%
+%  A imagem cobre apenas a ÁREA VIVA (sem sangria). A cor do
+%  \cgFundo aparece nas bordas de sangria após o corte.
+%  A imagem é esticada para preencher toda a área — prepare-a
+%  com as dimensões exatas do livro para evitar distorção:
+%    Capa/Contracapa : largura × altura mm  (ex: 148 × 210 mm)
+%    Lombada         : espessura × altura mm (ex: 30 × 210 mm)
+%
+%  Substitua o bloco \begin{capa}...\end{capa} acima por este:
+% ════════════════════════════════════════════════════════════
+
+% \begin{capa}
+%
+%   % Cor da sangria — deve combinar com a borda da imagem
+%   \cgFundo{000000}
+%
+%   % Imagem de fundo — deve estar na mesma pasta do .tex
+%   % Dimensões recomendadas: 148 × 210 mm a 300 dpi
+%   \cgImagemFundo{capa.jpg}
+%
+%   % Texto sobreposto à imagem
+%   \begin{cgMargens}{8}{10}{8}{10}
+%
+%     \color[HTML]{FFFFFF}
+%     \setstretch{1.1}
+%
+%     \vspace{8mm}
+%
+%     {\Centering
+%       {\fontsize{38}{40}\selectfont\bfseries
+%         \MakeUppercase{Título do Livro}\par}
+%     }
+%
+%     \vspace{5mm}
+%     \cgSeparador[FFFFFF]{1.2pt}{0pt}
+%     \vspace{5mm}
+%
+%     {\Centering
+%       {\fontsize{15}{18}\selectfont\bfseries
+%         \MakeUppercase{Subtítulo}\par}
+%     }
+%
+%     \cgVfill
+%
+%     {\Centering
+%       {\fontsize{13}{15}\selectfont\bfseries
+%         \MakeUppercase{Nome do Autor}\par}
+%     }
+%
+%     \vspace{8mm}
+%
+%   \end{cgMargens}
+% \end{capa}
+
+
+% ── Contracapa com imagem ────────────────────────────────────
+
+% \begin{contracapa}
+%
+%   \cgFundo{000000}
+%
+%   % Dimensões recomendadas: 148 × 210 mm a 300 dpi
+%   \cgImagemFundo{contracapa.jpg}
+%
+%   \begin{cgMargens}{10}{8}{8}{10}
+%
+%     \color[HTML]{FFFFFF}
+%     \setstretch{1.35}
+%     \setlength{\parindent}{0pt}
+%     \setlength{\parskip}{7pt}
+%
+%     {\fontsize{8.5}{12.5}\selectfont\justifying
+%       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+%       Nulla ac ex varius, finibus mauris luctus, elementum arcu.
+%       Duis imperdiet dictum tortor, vel ullamcorper orci vehicula.
+%     }
+%
+%     \cgVfill
+%
+%     {\fontsize{8}{10}\selectfont\color[HTML]{AAAAAA}
+%       ISBN 978-00-000-00000-0\par}
+%
+%   \end{cgMargens}
+% \end{contracapa}
+
+
+% ── Lombada com imagem ───────────────────────────────────────
+% A imagem da lombada deve ter exatamente espessura × altura mm.
+% Para 600 pág. gramatura 75: espessura = 30 mm → imagem 30 × 210 mm
+
+% \begin{lombada}
+%
+%   \cgFundo{000000}
+%
+%   % Dimensões recomendadas: espessura × altura mm a 300 dpi
+%   \cgImagemFundo{lombada.jpg}
+%
+%   \begin{cgMargensLombada}{8}{8}
+%     \color[HTML]{FFFFFF}
+%     {\fontsize{12}{14}\selectfont\bfseries
+%       \MakeUppercase{Título do Livro}%
+%       \hfill
+%       {\fontsize{9}{11}\selectfont VOL~1}%
+%     }
+%   \end{cgMargensLombada}
+% \end{lombada}
+
+
+% ════════════════════════════════════════════════════════════
+%  GERAÇÃO DA CAPA
+%  Deve ser o único conteúdo dentro do \begin{document}.
+%  Não adicione nada antes ou depois de \gerarCapa.
+% ════════════════════════════════════════════════════════════
+\begin{document}
+  \gerarCapa
+\end{document}
